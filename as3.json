@@ -7,10 +7,10 @@
         "class": "ADC",
         "schemaVersion": "3.0.0",
         "id": "33042160-3ae8-4636-9b2a-c98d22ab915d",
-        "label": "Motorola SINFF501",
+        "label": "FF501",
         "remark": "Example AS3 configuration",
         "updateMode": "complete",        
-        "SINFF501-01": {
+        "F501-01": {
             "class": "Tenant",
             "defaultRouteDomain": 0,
             "Application_1": {

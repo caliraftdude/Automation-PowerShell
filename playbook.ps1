@@ -77,7 +77,7 @@ $body = @{
 	maxLoginFailures = 5
 	minDuration = 0
 } | ConvertTo-Json
-#M0t0r0la
+
 
 $result = Invoke-RestMethod -SkipCertificateCheck -Method 'PATCH' -Uri $url -Headers $headers -Body $body
 Write-Output $result #>
@@ -385,7 +385,7 @@ Write-Host $($result | ConvertTo-Json)
 Write-Output "==================================================================="
 Write-Output "Upload DO configuration"
 Write-Output "==================================================================="
-$file = 'motorola-do.json'
+$file = 'do.json'
 $url = "{0}{1}" -f $big_ip, "/mgmt/shared/declarative-onboarding/"
 $poll_url = "{0}{1}" -f $big_ip, "/mgmt/shared/declarative-onboarding/task/"
 $headers = @{
@@ -479,7 +479,7 @@ Write-Host "DO policy deployed"
 Write-Output "==================================================================="
 Write-Output "Upload AS3 configuration"
 Write-Output "==================================================================="
-$file = 'motorola-as3.json'
+$file = 'as3.json'
 $url = "{0}{1}" -f $big_ip, "/mgmt/shared/appsvcs/declare?async=true"
 $headers = @{
 	'X-F5-Auth-Token' = $token
