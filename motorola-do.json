@@ -1,0 +1,111 @@
+{   
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-declarative-onboarding/master/src/schema/1.27.0/base.schema.json",
+    "schemaVersion": "1.27.0",
+    "class": "Device",
+    "async": true,
+    "label": "Motorola Direct Onboarding - base",
+    "Common": {
+        "class": "Tenant",
+        "mySystem": {
+            "class": "System",
+            "hostname": "MODIFY.fake.url",
+            "cliInactivityTimeout": 7200,
+            "consoleInactivityTimeout": 7200,
+            "autoPhonehome": false,
+			"autoCheck": false
+        },
+        "myDns": {
+            "class": "DNS",
+            "nameServers": [
+				"10.1.1.1",
+				"1.1.1.1",
+				"1.0.0.1",
+                "8.8.8.8",
+                "8.8.4.4"
+            ],
+            "search": [
+                "f5labs.com"
+            ]
+        },
+        "myNtp": {
+            "class": "NTP",
+            "servers": [
+                "0.pool.ntp.org",
+                "1.pool.ntp.org",
+                "2.pool.ntp.org",
+				"3.pool.ntp.org"
+            ],
+            "timezone": "UTC"
+        },
+        "myProvisioning": {
+            "class": "Provision",
+            "ltm": "nominal"
+        },
+        "VLAN_EXTERNAL": {
+            "class": "VLAN",
+            "mtu": 1500,
+            "interfaces": [
+                {
+                    "name": "1.1",
+                    "tagged": false
+                }
+            ],
+            "cmpHash": "src-ip"
+        },
+		"SIP_EXTERNAL": {
+            "class": "SelfIp",
+            "address": "10.1.10.151/24",
+            "vlan": "VLAN_EXTERNAL",
+            "allowService": "none",
+            "trafficGroup": "traffic-group-local-only"
+        },
+		"VLAN_INTERNAL": {
+            "class": "VLAN",
+            "mtu": 1500,
+            "interfaces": [
+                {
+                    "name": "1.2",
+                    "tagged": false
+                }
+            ],
+            "cmpHash": "src-ip"
+        },
+		"SIP_INTERNAL": {
+            "class": "SelfIp",
+            "address": "10.1.20.151/24",
+            "vlan": "VLAN_INTERNAL",
+            "allowService": "none",
+            "trafficGroup": "traffic-group-local-only"
+        },
+		"VLAN_HA": {
+            "class": "VLAN",
+            "mtu": 1500,
+            "interfaces": [
+                {
+                    "name": "1.3",
+                    "tagged": false
+                }
+            ],
+            "cmpHash": "src-ip"
+        },
+        "SIP_HA": {
+            "class": "SelfIp",
+            "address": "10.1.30.151/24",
+            "vlan": "VLAN_HA",
+            "allowService": "none",
+            "trafficGroup": "traffic-group-local-only"
+        },
+        "DEFAULT": {
+            "class": "Route",
+            "gw": "10.1.10.2",
+            "network": "default",
+            "mtu": 1500
+        },
+        "managementRoute": {
+            "class": "ManagementRoute",
+            "gw": "10.1.1.1",
+            "network": "255.255.255.0",
+            "mtu": 1500
+        }
+    }
+}

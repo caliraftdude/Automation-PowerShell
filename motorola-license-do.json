@@ -1,0 +1,23 @@
+{
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-declarative-onboarding/master/src/schema/1.27.0/base.schema.json",
+    "schemaVersion": "1.27.0",
+    "class": "Device",
+    "async": true,
+    "label": "Motorola Direct Onboarding - licensing",
+    "Common": {
+        "class": "Tenant",
+        "mySystem": {
+            "class": "System",
+            "hostname": "MODIFY",
+            "cliInactivityTimeout": 7200,
+            "consoleInactivityTimeout": 7200,
+            "autoPhonehome": false,
+			"autoCheck": false
+        },
+        "myLicense": {
+            "class": "License",
+            "licenseType": "regKey",
+            "regKey": "LYGLJ-JOIJW-AMLDL-BHBIH-VDHDPGA"
+        }
+	}
+}

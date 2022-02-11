@@ -1,0 +1,44 @@
+{
+    "$schema": "https://raw.githubusercontent.com/F5Networks/f5-appsvcs-extension/master/schema/3.34.0/as3-schema.json",
+    "class": "AS3",
+    "action": "deploy",
+    "persist": true,
+    "declaration": {
+        "class": "ADC",
+        "schemaVersion": "3.0.0",
+        "id": "33042160-3ae8-4636-9b2a-c98d22ab915d",
+        "label": "Motorola SINFF501",
+        "remark": "Example AS3 configuration",
+        "updateMode": "complete",        
+        "SINFF501-01": {
+            "class": "Tenant",
+            "defaultRouteDomain": 0,
+            "Application_1": {
+                "class": "Application",
+                "template": "http",
+            "serviceMain": {
+                "class": "Service_HTTP",
+                "virtualAddresses": [
+                    "10.1.10.115"
+                ],
+                "pool": "web_pool"
+                },
+                "web_pool": {
+                    "class": "Pool",
+                    "monitors": [
+                        "http"
+                    ],
+                    "members": [
+                        {
+                            "servicePort": 80,
+                            "serverAddresses": [
+                                "10.1.20.50",
+                                "10.1.20.51"
+                            ]
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
