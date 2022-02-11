@@ -3,7 +3,7 @@
     "schemaVersion": "1.27.0",
     "class": "Device",
     "async": true,
-    "label": "Motorola Direct Onboarding - base",
+    "label": "Direct Onboarding - base",
     "Common": {
         "class": "Tenant",
         "mySystem": {
