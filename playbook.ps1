@@ -224,8 +224,16 @@ $body = @{
 } | ConvertTo-Json
 
 # Initiate the installation request and capture the result id (task uuid) which we can poll for installation progress
-$result = Invoke-RestMethod -SkipCertificateCheck -Method 'POST' -Uri $install_url -Headers $headers -Body $body
-$poll_url = "{0}{1}{2}" -f $big_ip, "/mgmt/shared/iapp/package-management-tasks/", $($result.id)
+try {
+	$result = Invoke-RestMethod -SkipCertificateCheck -Method 'POST' -Uri $install_url -Headers $headers -Body $body
+	$poll_url = "{0}{1}{2}" -f $big_ip, "/mgmt/shared/iapp/package-management-tasks/", $($result.id)
+	$code = $result.StatusCode
+} catch {
+	$code = $_.Exception.Response.StatusCode.value__
+}
+
+Write-Host "Install DO request returned: {1}`n" -f $code
+
 
 # Enter a polling loop checking for completion or failure
 do {
@@ -324,8 +332,15 @@ $body = @{
 } | ConvertTo-Json
 
 # Initiate the installation request and capture the result id (task uuid) which we can poll for installation progress
-$result = Invoke-RestMethod -SkipCertificateCheck -Method 'POST' -Uri $install_url -Headers $headers -Body $body
-$poll_url = "{0}{1}{2}" -f $big_ip, "/mgmt/shared/iapp/package-management-tasks/", $($result.id)
+try {
+	$result = Invoke-RestMethod -SkipCertificateCheck -Method 'POST' -Uri $install_url -Headers $headers -Body $body
+	$poll_url = "{0}{1}{2}" -f $big_ip, "/mgmt/shared/iapp/package-management-tasks/", $($result.id)
+	$code = $result.StatusCode
+} catch {
+	$code = $_.Exception.Response.StatusCode.value__
+}
+
+Write-Host "Install AS3 request returned: {1}`n" -f $code
 
 # Enter a polling loop checking for completion or failure
 do {
