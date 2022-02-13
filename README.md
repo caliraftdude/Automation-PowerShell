@@ -17,3 +17,11 @@ and provided entirely free.
  
 Requires PS 7.x or >
 Elements borrowed from here:  https://github.com/mjmenger/terraform-bigip-postbuild-config/blob/main/atcscript.tmpl
+
+Requires DO and AS3 RPMs.  These can be found here:
+
+AS3 Releases:  https://github.com/f5networks/f5-appsvcs-extension/releases
+DO Releases:   https://github.com/F5Networks/f5-declarative-onboarding/releases
+
+Ensure that the references to in the playbook to RPMs match the filenames/versions you download.  It is also advisable that you update the $schema reference at the top of the script.
+
