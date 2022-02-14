@@ -227,12 +227,13 @@ $body = @{
 try {
 	$result = Invoke-RestMethod -SkipCertificateCheck -Method 'POST' -Uri $install_url -Headers $headers -Body $body
 	$poll_url = "{0}{1}{2}" -f $big_ip, "/mgmt/shared/iapp/package-management-tasks/", $($result.id)
-	$code = $result.StatusCode
+
 } catch {
 	$code = $_.Exception.Response.StatusCode.value__
+	Write-Host "Error at install DO request: " $code 
 }
 
-Write-Host "Install DO request returned: {1}`n" -f $code
+exit
 
 
 # Enter a polling loop checking for completion or failure
@@ -335,12 +336,12 @@ $body = @{
 try {
 	$result = Invoke-RestMethod -SkipCertificateCheck -Method 'POST' -Uri $install_url -Headers $headers -Body $body
 	$poll_url = "{0}{1}{2}" -f $big_ip, "/mgmt/shared/iapp/package-management-tasks/", $($result.id)
-	$code = $result.StatusCode
+
 } catch {
 	$code = $_.Exception.Response.StatusCode.value__
+	Write-Host "Error at install AS3 request: " $code 
 }
 
-Write-Host "Install AS3 request returned: {1}`n" -f $code
 
 # Enter a polling loop checking for completion or failure
 do {
