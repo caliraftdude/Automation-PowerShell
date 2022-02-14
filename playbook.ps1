@@ -233,7 +233,6 @@ try {
 	Write-Host "Error at install DO request: " $code 
 }
 
-exit
 
 
 # Enter a polling loop checking for completion or failure
@@ -313,7 +312,7 @@ Write-Host $($result | ConvertTo-Json)
 # Install AS3 
 # ================================================================================
 Write-Output "==================================================================="
-Write-Output "Install As3 package"
+Write-Output "Install AS3 package"
 Write-Output "==================================================================="
 $file = "f5-appsvcs-3.34.0-4.noarch.rpm"
 $install_url = "{0}{1}" -f $big_ip, "/mgmt/shared/iapp/package-management-tasks"
@@ -527,7 +526,6 @@ try {
     $result = Invoke-RestMethod -SkipCertificateCheck -SkipHeaderValidation -Method 'POST' -Uri $url -Headers $headers -InFile $file
 	$poll_url = "{0}{1}{2}" -f $big_ip, "/mgmt/shared/appsvcs/task/", $($result.id)
 
-	Write-Host $poll_url
 	# Extract the job id from the response, so we can poll this for completion later
 	$retries = 0			# Number of times the system has been polled
 	$retry_limit = 7		# max number of times the system will be polled
