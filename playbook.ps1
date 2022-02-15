@@ -377,6 +377,7 @@ do {
 		422 {
 			Write-Host $response "- ATC service in failed state - likely from a previous run."
 			$response = 200
+			break
 		}
 		4* {
 			Write-Host $response "- ATC service in failed state - this may be transient"
@@ -469,7 +470,7 @@ try {
 				break
 			}
 			422 {
-				Write-Host $response "- detected"
+				Write-Host $response "- detected, failed to upload DO policy"
 				throw [System.Exception] "Exiting the script.."
 			}
 			4* {
