@@ -31,7 +31,7 @@ $credential = Get-Credential
 # access credentials?
 Write-Host $credential.UserName
 Write-Host $(ConvertFrom-SecureString -SecureString $credential.Password -AsPlainText)
- #>
+#>
 
 $big_ip = "https://10.1.1.151"
 
@@ -67,7 +67,7 @@ try {
     $result = Invoke-RestMethod -SkipCertificateCheck -Method 'GET' -Uri $url -Headers $headers -ContentType 'application/json'
 
 } catch {
-    # Can't capture the response code with Invoke-RestMethod, but can catch the expection and assume failure.
+    # Can't capture the response code with Invoke-RestMethod, but can catch the exception and assume failure.
     Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__ 
 	Write-Host "Authentication token / attempt failed.  Exiting..."
 	exit
@@ -160,7 +160,7 @@ try {
     $result = Invoke-RestMethod -SkipCertificateCheck -SkipHeaderValidation -Method Post -Uri $url -Headers $headers -InFile $file
 
 } catch [Exception] {
-    # Can't capture the response code with Invoke-RestMethod, but can catch the expection and assume failure.
+    # Can't capture the response code with Invoke-RestMethod, but can catch the exception and assume failure.
     Write-Host "StatusCode:" $_.Exception.Response.StatusCode.value__
 	Write-Host "StatusDescription:" $_.Exception.Response.StatusDescription 
 	
