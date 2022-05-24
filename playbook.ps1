@@ -52,6 +52,10 @@ $result = Invoke-RestMethod -SkipCertificateCheck -Method 'POST' -Uri $url -Cont
 $token = $($result.token.token)
 Write-Output ""
 
+# Because of bug-id: 1108181, subsequent attempts to use a newly acquired, or refreshed, token can fail.
+# A cheap workaround, possibly, is to wait a few seconds
+Start-Sleep -s 5
+
 # ================================================================================
 # Verify token
 # ================================================================================
